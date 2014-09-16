@@ -3,74 +3,153 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta name="viewport" content="width=640">
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
     <title>Basis Data Export Utility by dominga11</title>
   </head>
 
   <body>
-    <div id="container">
-      <div class="inner">
+    <a id="forkme_banner" href="https://github.com/dominga11/basis-data-export">View on GitHub</a>
+    <div class="shell">
 
-        <header>
-          <h1>Basis Data Export Utility</h1>
-          <h2>Utility that exports your Basis device&#39;s uploaded sensor device data from their website.</h2>
-        </header>
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Basis Data Export Utility</h1>
+            <h2>Utility that exports your Basis device&#39;s uploaded sensor device data from their website.</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/dominga11/basis-data-export/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/dominga11/basis-data-export/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/dominga11/basis-data-export" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/dominga11/basis-data-export/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/dominga11/basis-data-export/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
 
-        <hr>
 
-        <section id="main_content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+      <span class="banner-fix"></span>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+      <section id="main_content">
+        <h1>
+<a name="basis-data-export" class="anchor" href="#basis-data-export"><span class="octicon octicon-link"></span></a>Basis Data Export</h1>
+
+<p>Utility that exports and saves your Basis B1 device's uploaded sensor data.
+You can learn more about Basis at <a href="http://www.mybasis.com/">http://www.mybasis.com/</a></p>
+
+<h2>
+<a name="instructions" class="anchor" href="#instructions"><span class="octicon octicon-link"></span></a>Instructions</h2>
+
+<p>In order to use this script, you must already have a Basis account (and a Basis B1 band).</p>
+
+<h3>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage:</h3>
+
+<p>This script can be run several ways. You can (and should probably) first edit the <code>BASIS_USERNAME</code>, <code>BASIS_PASSWORD</code>, and <code>BASIS_EXPORT_FORMAT</code> values under "Settings" in the file <code>basisdataexport.php</code> so you don't have to specify those values every time the script is run. Make sure the <code>data/</code> folder is writable!</p>
+
+<p><img src="http://www.quantifiedbob.com/images/basis-screenshots/basis-export-screenshot-config.png" alt="basis export config"></p>
+
+<h3>
+<a name="method-1---interactive-mode" class="anchor" href="#method-1---interactive-mode"><span class="octicon octicon-link"></span></a>Method 1 - Interactive Mode</h3>
+
+<p><img src="http://www.quantifiedbob.com/images/basis-screenshots/basis-export-screenshot-1.png" alt="basis export option 1"></p>
+
+<ol>
+<li>Open a terminal window and cd to this script's directory</li>
+<li>Type <code>php basisdataexport.php</code>
+</li>
+<li>Follow the prompts (hit ENTER to use default values)</li>
+<li>Your data will be saved to <code>/data/basis-data-[YYYY-MM-DD].[format]</code>
+</li>
+</ol><h3>
+<a name="method-2---via-command-line-arguments-useful-for-crons" class="anchor" href="#method-2---via-command-line-arguments-useful-for-crons"><span class="octicon octicon-link"></span></a>Method 2 - Via command-line arguments (useful for crons)</h3>
+
+<p><img src="http://www.quantifiedbob.com/images/basis-screenshots/basis-export-screenshot-2.png" alt="basis export option 2"></p>
+
+<p>Usage <code>php basisdataexport.php -h -u[username] -p[pass] -d[YYYY-MM-DD] -f[json|csv|html]</code></p>
+
+<pre><code>Options:
+  -u  Basis username (if not used, defaults to BASIS_USERNAME)
+  -p  Basis password (if not used, defaults to BASIS_PASSWORD)
+  -d  Data export date (YYYY-MM-DD) (if not used, defaults to current date)
+  -f  Data export format (json|csv|html) (if not used, defaults to json)
+  -h  Show this help text
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>Make sure there are no spaces between any flags and values!</p>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="method-3---via-web-browser" class="anchor" href="#method-3---via-web-browser"><span class="octicon octicon-link"></span></a>Method 3 - Via web browser</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>This requires that the scripts are in a location that is executable via a web server.</p>
+
+<p><code>http://localhost/basis-data-export/basisdataexport.php?u=[basis_username]&amp;p=[basis_password]&amp;d=[YYYY-MM-DD]&amp;f=[format]</code></p>
+
+<h2>
+<a name="saving-your-data" class="anchor" href="#saving-your-data"><span class="octicon octicon-link"></span></a>Saving Your Data</h2>
+
+<p>If the script runs successfully, your data will be saved in the <code>data/</code> folder. Files are saved in the format <code>basis-data-[YYYY-MM-DD].[format]</code> (i.e., <code>basis-data-2014-04-04.json</code>).</p>
+
+<p>That's it! (for now).</p>
+
+<h2>
+<a name="data-values" class="anchor" href="#data-values"><span class="octicon octicon-link"></span></a>Data Values</h2>
+
+<p>Basis currently returns the following data points. They will represent an average (for heart rate) or sum (steps) over the previous 1-minute period:</p>
+
+<ul>
+<li>Time - time reading was taken</li>
+<li>Heart Rate - beats per minute</li>
+<li>Steps - number of steps taken</li>
+<li>Calories - number of calories burned</li>
+<li>GSR - Galvanic skin response (i.e., sweat/skin conductivity. Learn more about GSR here - <a href="http://en.wikipedia.org/wiki/Skin_conductance">http://en.wikipedia.org/wiki/Skin_conductance</a>
+</li>
+<li>Skin Temperature - skin temperature (degrees F)</li>
+<li>Air Temperature - air temperatute (degrees F)</li>
+</ul><p>There are some other aggregate metrics included in the reponse such as min/max/average/standard deviation metrics for each set of data.</p>
 
 <h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<a name="tips" class="anchor" href="#tips"><span class="octicon octicon-link"></span></a>Tips</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<ul>
+<li>You can set up a cron to run once per day to automatically grab your previous day's data (assuming you are syncing your device each day)</li>
+<li>
+<p>If you want to archive data across a date range you can use curl's [ ] syntax to do it easily (thanks to <a href="http://twitter.com/edrabbit">@Edrabbit</a> for the tip!). For example, to get all of May cached in /data:</p>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<p><code>curl http://localhost/basis-data-export/basisdataexport.php?date=2013-05-[01-31]</code></p>
+</li>
+</ul>
+      </section>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/dominga11">dominga11</a> can be found on <a href="https://github.com/dominga11/basis-data-export">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </section>
-
-        <footer>
-          Basis Data Export Utility is maintained by <a href="https://github.com/dominga11">dominga11</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
-
-        
-      </div>
     </div>
+
+    
   </body>
 </html>
